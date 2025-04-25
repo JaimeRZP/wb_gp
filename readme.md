@@ -12,6 +12,7 @@ Let's focus on building a differentiable pipeline to fit a GP to the data.
 - Gaussian processes: https://arxiv.org/abs/2201.07025
 
 ## To Do's
+- [ ] Windows How to install Linux on Windows with WSL https://learn.microsoft.com/en-us/windows/wsl/install
 - [ ] Familiarize with GitHub and Git.
 - [ ] Familiarize with VsCode.
 - [ ] Read thesis chapters about Gaussian processes and auto-differentiation.
