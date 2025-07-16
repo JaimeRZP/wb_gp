@@ -1,0 +1,173 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "a85259fa",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "using LimberJack\n",
+    "using ForwardDiff\n",
+    "using BenchmarkTools"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "7953b0f9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "theory (generic function with 1 method)"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "function theory(var_arr)\n",
+    "    zs = range(0.5, 2.5, length=3)\n",
+    "    omegam = var_arr[1]\n",
+    "    omegab = var_arr[2]\n",
+    "    hc = var_arr[3]\n",
+    "    cos = Cosmology(Ωm=omegam, Ωb=omegab, h=hc, ns=0.56, s8=0.61)\n",
+    "    H1 = cos.cpar.h*100*Ez(cos, zs)\n",
+    "    return H1\n",
+    "end"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "ddc8ee7b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "3-element Vector{Float64}:\n",
+       " 0.3\n",
+       " 0.1\n",
+       " 0.67"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "a = [0.3, 0.05, 0.67]\n",
+    "b = [0.3, 0.1, 0.67]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "fd972cef",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  1.661 ms (15078 allocations: 3.92 MiB)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "3-element Vector{Float64}:\n",
+       "  87.68757509699451\n",
+       " 155.5647759355543\n",
+       " 246.8691516056681"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "@btime theory(a)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "0ed0e998",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  1.575 ms (15078 allocations: 3.92 MiB)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "3-element Vector{Float64}:\n",
+       "  87.68757509699451\n",
+       " 155.5647759355543\n",
+       " 246.8691516056681"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "@btime theory(b)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "cb4619ed",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  2.672 ms (15146 allocations: 15.13 MiB)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "3×3 Matrix{Float64}:\n",
+       "  60.7918  0.0  130.848\n",
+       " 211.011   0.0  232.034\n",
+       " 380.722   0.0  368.085"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "@btime ForwardDiff.jacobian(theory, a)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Julia 1.11.5",
+   "language": "julia",
+   "name": "julia-1.11"
+  },
+  "language_info": {
+   "file_extension": ".jl",
+   "mimetype": "application/julia",
+   "name": "julia",
+   "version": "1.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
