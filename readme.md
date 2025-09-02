@@ -1,22 +1,23 @@
-# Constraining $\Omega_b$ with GPs
+# Constraining $\Omega_m$ with DESI and DES data
 
 ## Description
-Quasars are extremely bright galactic nuclei. Due to their brightness, quasars can be observed far into the distant Universe. During their long travel, quasars’ photons interact with the baryonic matter in between their source and us. Such interactions provided the intergalactic medium with given opacity, also known as optical depth. If the optical depth were one, the intergalactic medium would be completely opaque and vice versa. Since said opacity is proportional to the amount of baryonic matter, observations of the quasar optical depth can be used to constrain the density of baryons into the late Universe. So far this measurement has been made in the context of the current cosmological paradigm, the LCDM model. The goal of this project is to extend this methodology beyond the LCDM by replacing the assumptions of the model with advanced data fitting techniques such as Gaussian processes. The student could also explore better modelling of some of the most problematic quantities such as the Universe's thermal history and the photo-ionization rate of photons. The results of this project will help us establish data-driven methods to measure the baryonic matter density without the assumptions of the LCDM model. A student that undertakes this project will gain vital skills in data processing, statistics and cosmology; highly applicable inside and outside academia. 
+The idea of this project is to reproduce the results of Ruiz-Zapatero et al 2021 (https://arxiv.org/abs/2201.07025) with new data from DESI and DES.
+In this project we want to use the Jeans equation for the linear growth of anisotropies to constrain $\Omega_m$:
 
-## Goals
-Let's focus on building a differentiable pipeline to fit a GP to the data.
+$$
+𝑓'+ 𝑓^2 + \left( 1 + \frac{d ln a H}{d ln a} \right) = \frac{3}{2} \Omega_m(z)
+$$
 
-## References 
-- Methology $\Omega_b$: https://arxiv.org/pdf/2501.18182
-- Radiative transfer: https://arxiv.org/pdf/1505.07875
-- Gaussian processes: https://arxiv.org/abs/2201.07025
+This equation only depends on the LCDM model through H(z). Thus, we can obtain a model independent constraint on \Omega_m by modelling H(z) with a Gaussian Process.
+In order to improve the constraining power, we fit the Gaussian Process simultaneously to H(z) and comoving distance data as well as $f\sigma_8$ data.
+
+## New data
+DESI Full Shape: https://arxiv.org/pdf/2411.12021 (table 9)
+ACTxQuaia: https://arxiv.org/pdf/2507.08798 (Fig 12)
+DES Y5 supernova: https://github.com/des-science/DES-SN5YR/tree/main/4_DISTANCES_COVMAT
 
 ## To Do's
-- [ ] Windows How to install Linux on Windows with WSL https://learn.microsoft.com/en-us/windows/wsl/install
-- [ ] Familiarize with GitHub and Git.
-- [ ] Familiarize with VsCode.
-- [ ] Read thesis chapters about Gaussian processes and auto-differentiation.
-- [ ] Download Julia https://julialang.org/downloads/
-- [ ] Familiaze with Turing.jl for inference https://github.com/TuringLang/Turing.jl.
-- [ ] Familiarize with LimberJack.jl for H(z) modelling https://github.com/JaimeRZP/LimberJack.jl.
-- [ ] Familiarize with GaussianProcesses.jl for Gaussian processes https://github.com/JaimeRZP/GaussianProcess.jl.
+- [ ] Finish the auto-differentiable pipeline for comoving distances.
+- [ ] Implement the pipelien for fsigma8.
+- [ ] Connect the pipeline to the newest data.
+- [ ] Potentially include the m-parameter but this would be quite involved.
