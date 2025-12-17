@@ -16,6 +16,7 @@ In order to improve the constraining power, we fit the Gaussian Process simultan
 - DESI Ly-alpha: https://arxiv.org/abs/2509.15308
 - ACTxQuaia: https://arxiv.org/pdf/2507.08798 (Fig 12)
 - DES Y5 supernova: https://github.com/des-science/DES-SN5YR/tree/main/4_DISTANCES_COVMAT
+- DS17 (old supernova): https://github.com/JaimeRZP/Growz/tree/main/data/raw/PantheonDS17
 
 ## To Do's
 - [ ] Finish the auto-differentiable pipeline for comoving distances.
