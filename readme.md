@@ -12,10 +12,11 @@ This equation only depends on the LCDM model through H(z). Thus, we can obtain a
 In order to improve the constraining power, we fit the Gaussian Process simultaneously to H(z) and comoving distance data as well as $f\sigma_8$ data.
 
 ## New data
-- DESI Full Shape: https://arxiv.org/pdf/2411.12021 (table 9)
+- DESI Full Shape: https://arxiv.org/pdf/2411.12021 (table 9)(code for transformation: https://github.com/SamuelBrieden/shapefit_montepython_code/blob/main/shapefit_montepython_code/shapefit_bossdr12_max_kmin01kmax15/__init__.py)
 - DESI Ly-alpha: https://arxiv.org/abs/2509.15308
 - ACTxQuaia: https://arxiv.org/pdf/2507.08798 (Fig 12)
 - DES Y5 supernova: https://github.com/des-science/DES-SN5YR/tree/main/4_DISTANCES_COVMAT
+- DS17 (old supernova): https://github.com/JaimeRZP/Growz/tree/main/data/raw/PantheonDS17
 
 ## To Do's
 - [ ] Finish the auto-differentiable pipeline for comoving distances.
